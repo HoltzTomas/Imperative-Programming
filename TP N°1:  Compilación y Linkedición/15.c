@@ -9,3 +9,4 @@ main(void)
 		/* Se calcula el promedio */
 		return 0;
 }
+x
