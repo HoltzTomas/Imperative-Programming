@@ -4,7 +4,7 @@
 
 int main(void) {
     // Usando límites del header <limits.h>
-    printf("Usando limits.h:\n");
+    printf("Usando limits.h:\n\a");
     printf("char: [%d, %d]\n", CHAR_MIN, CHAR_MAX);
     printf("unsigned char: [0, %u]\n", UCHAR_MAX);
     printf("short: [%d, %d]\n", SHRT_MIN, SHRT_MAX);
