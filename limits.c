@@ -43,7 +43,17 @@ int main(void) {
     printf("Máximo positivo: %Le\n", LDBL_MAX);
     printf("Precisión: %d dígitos\n", LDBL_DIG);
     printf("Diferencia mínima: %Le\n", LDBL_EPSILON);
+    printf("\n");
 
+
+    printf("==============================\n");
+
+    printf("Cantidad de bits\n");
+
+    printf("Tamaño de char: %zu bytes\n", sizeof(char));
+    printf("Tamaño de short: %zu bytes\n", sizeof(short));
+    printf("Tamaño de int: %zu bytes\n", sizeof(int));
+    printf("Tamaño de long: %zu bytes\n", sizeof(long));
 
 
     return 0;

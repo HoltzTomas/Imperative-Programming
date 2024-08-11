@@ -31,14 +31,15 @@
 
 
 int main(void) {
-    int a,b,c;
+    int total;
+    float average;
 
-    a = (unsigned int) L'ñ';
-    b = (signed char) L'ñ';
-    c = (unsigned char) L'ñ';
-    
-    printf("%d %d %d %d\n", a, b, c, L'ñ');
-    // printf("%c %c %c %c\n", a, b, c, 'ñ');
+    printf("Introduce el total y el promedio:\n");
+    scanf("%d %f", &total, &average);
+
+    printf("Total: %d\nAverage: %.2f\n", total, average);
+
+    fprintf(stderr, "BUILDING ON FIRE, %f%% BURNT!!!\n", average);    fprintf(stderr, "BUILDING ON FIRE, %f%% BURNT!!!\n", average);
 
     return 0;
 }
