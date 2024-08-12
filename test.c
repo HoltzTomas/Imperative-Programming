@@ -31,15 +31,11 @@
 
 
 int main(void) {
-    int total;
-    float average;
+    int x,y;
+    x=(char)300;
+    y=x++;
 
-    printf("Introduce el total y el promedio:\n");
-    scanf("%d %f", &total, &average);
-
-    printf("Total: %d\nAverage: %.2f\n", total, average);
-
-    fprintf(stderr, "BUILDING ON FIRE, %f%% BURNT!!!\n", average);    fprintf(stderr, "BUILDING ON FIRE, %f%% BURNT!!!\n", average);
+    printf("%d", x);
 
     return 0;
 }
