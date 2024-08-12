@@ -1,6 +1,1 @@
-Este
-es
-un
-programa
-en
-C
+Ingrese el primer carácter: Ingrese el segundo carácter: El carácter a es menor que b.
