@@ -1,0 +1,1 @@
+Ejercicio 12: Deberia utilizar int en lugar de unsigned char para manenar el EOF que es -1?
