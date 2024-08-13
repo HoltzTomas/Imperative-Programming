@@ -1,4 +1,2 @@
-Ejercicio 12: Deberia utilizar int en lugar de unsigned char para manenar el EOF que es -1?
-Ejercicio 17: pasa efectivamente lo q digo?
 
 En el 21 no pasa nada con el flag

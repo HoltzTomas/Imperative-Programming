@@ -5,8 +5,9 @@
 #include <stdio.h>
 
 int main(void) {
-    //Deberia utilizar un int para manejar un EOF?
-    unsigned char letra = getchar();
+    //Deberia utilizar un int para manejar un EOF? Si
+    // unsigned char letra = getchar();
+    int letra = getchar();
     int isLetra = (letra >= 'A' && letra <='Z') || (letra >= 'a' && letra <='z');
 
     //Esto no es un operador condicional pero es una forma mas linda de hacerlo

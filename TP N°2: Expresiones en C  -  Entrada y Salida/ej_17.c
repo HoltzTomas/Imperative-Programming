@@ -8,7 +8,7 @@
    	3 + 4; //7
  	'3' + 4; // Valor ASCII de 3 mas el numero 4
  	3 + '4'; // Valor ASCII de 4 mas el numero 3
- 	"3" + '4'; //Desplaza al puntero ASCII 4 posiciones en la memoria (Creo)
- 	"3" + 4; // Desplaza al puntero 4 posiciones en la memorioa (Creo)
+ 	"3" + '4'; //Desplaza al puntero ASCII 4 posiciones en la memoria 
+ 	"3" + 4; // Desplaza al puntero 4 posiciones en la memorioa
  	return 0;
  }
