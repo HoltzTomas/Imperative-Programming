@@ -29,13 +29,12 @@
 //     return 0;
 // }
 
-
-int main(void) {
-    int x,y;
-    x=(char)300;
-    y=x++;
-
-    printf("%d", x);
-
-    return 0;
+#include <stdio.h>  
+int
+main(void)
+{
+   for(int i=9; i>=0; i>>1) {
+      putchar(i+'0');
+   }
+   return 0;
 }
