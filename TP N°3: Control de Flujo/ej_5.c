@@ -13,7 +13,7 @@ int main(void){
     c = getchar();
 
 
-    const int aIsVocal = isVocal(a);
+    int aIsVocal = isVocal(a);
 
     if (!aIsVocal && isUppperCase){
         printf("El caracter %c es una consonante mayúscula \n", a);
