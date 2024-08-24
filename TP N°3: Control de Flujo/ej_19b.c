@@ -1,48 +1,53 @@
-//Leer un numero real indicando cuantos 5 tiene en su parte entera y cuantos en su parte decimal
-//No mas de 25 lineas
-
-//1. Tomar el double y truncarlo en una varibale auxiliar y con eso contas los 5
-//2. Con esa aux, la cual es un int, en otra variable double guardar la parte decimal
 #include <stdio.h>
 #include "../getnum.h"
 
-int main(void){
+// En el caso de los reales, lo mejor es manejarse con strings para tener una representacion exacta
+// Recibiremos por entrada estandar un numero real, e iremos sumando los 5 "enteros" hasta encontrar una coma/punto
+// a partir de ahí empezamos a sumar los 5 "decimales" hasta en
 
-    double num = getdouble("Ingresar el numero en cuestion: ");
-    int integerCounter = 0, decimalCounter = 0;
-    int aux = num;
+#define TRUE 1
+#define FALSE !TRUE
 
-    //Print de chequeo
-    printf("Ingresado: %g\n", num);
-    printf("Entero Auxiliar: %d\n", aux);
+//Elegí utilizar un enum en lugar de flags enteros por tema de seguridad y simplicidad
+//La cantidad de estados posibles son 2 elevado a la cantidad de flags
+//Si tenes 2 flags isIntegerPart y isDecimalPart por ejemplo para saber que estas contando tenes 4 estados posibles
+//Deberias manejar los cuatro estados, y el codigo queda menos claro
+//Con un enum es mas claro, y tenes un estado menos.
 
-    //Cuentos cuantos 5 hay en la parte entera
-    //Recorro todos los digitos
-    while (aux > 0) {
-        if(aux % 10 == 5) {
-            integerCounter++;
+typedef enum {
+    DECIMAL_PART,
+    INTEGER_PART,
+    FINISH
+} CounterState;
+
+int main(void)
+{
+    CounterState counterState = INTEGER_PART;  // Estado inicial
+    int c, integerCounter = 0, decimalCounter = 0;
+
+    // Corremos el ciclo hasta el salto de linea, mientras c sea un digito o una coma
+    while ((c = getchar()) != '\n' && counterState != FINISH && ((c >= '0' && c <= '9') || c == ','))
+    {
+        if (c == '5') {
+            if (counterState == INTEGER_PART ) {
+                integerCounter++;
+            } else if (counterState == DECIMAL_PART) {
+                decimalCounter++;
+            }
+        } 
+
+        if (c == ',') {
+            if (counterState == INTEGER_PART ) {
+                counterState = DECIMAL_PART;
+            } else if (counterState == DECIMAL_PART) {
+                counterState = FINISH;
+            }
         }
-        aux /= 10;
     }
 
-    //num sigue teniendo el valor double, le restamos la parte entera y nos quedamos con la decimal
-    num -= (int) num;
-    printf("Double Auxiliar: %g\n", num);
-
-    //Ahora recorro la parte decimal y cuento los 5
-    while(num!=0){
-        aux = num * 10; //Now aux is 1
-        printf("Convierte %f a %d\n", num, aux);
-        if(aux % 10 == 5) {
-            decimalCounter++;
-        }
-        num *=10; // Now nomber is 1.1
-        num -= aux; //Number is 0.1
-        printf("Counter:  %d\n", decimalCounter);
-    }
-
-    printf("Final integer counter:  %d\n", integerCounter);
-    printf("Final decimal counter:  %d\n", decimalCounter);
+    // Imprimir los resultados
+    printf("Cantidad de '5' en la parte entera: %d\n", integerCounter);
+    printf("Cantidad de '5' en la parte decimal: %d\n", decimalCounter);
 
     return 0;
 }

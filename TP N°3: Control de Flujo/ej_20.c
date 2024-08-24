@@ -1,0 +1,3 @@
+//Escribir un programa (en no más de 10 líneas) que calcule el valor de la constante matemática e utilizando la fórmula 
+//e = 1 + 1/1!  + 1/2! + 1/3! +...
+//e imprima una tabla que indique cantidad de términos de la serie y el resultado parcial, con el siguiente formato:
