@@ -16,8 +16,7 @@ int randInt(int izq, int der) {
         izq = der;
         der = aux;
     }
-    return randNormalize()
-    *(der-izq+1) + izq;
+    return randNormalize() * (der-izq+1) + izq;
     // return rand() % (der - izq + 1)  + izq;
 }
 

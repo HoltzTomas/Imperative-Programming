@@ -3,6 +3,8 @@
     "files.associations": {
         "ratio": "c",
         "stdio.h": "c",
-        "getnum.h": "c"
+        "getnum.h": "c",
+        "stdlib.h": "c",
+        "chrono": "c"
     }
 }

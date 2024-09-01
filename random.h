@@ -20,6 +20,6 @@
 
 #define randomize() \
     srand(time(NULL)); \
-    rand(); 
+    rand();
 
 #endif /* random_h */
