@@ -35,5 +35,5 @@ int main(void) {
 }
 
 double function(double x){
-    return sin(x);
+    return pow(2, x) *  pow(x,3);
 }
