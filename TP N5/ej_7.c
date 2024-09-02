@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include <math.h>
 
-#define PRECISION  0.2
+#define PRECISION  0.05
 #define E 2.718281828459045
 
 double exp_approx(double x);
-int factorial (int c);
 
 int main(void) {
     printf("Aproximación de e^x: %lf\n", exp_approx(3));
@@ -16,22 +15,17 @@ int main(void) {
 }
 
 double exp_approx(double x) {
+    int factorial = 1;
+    int exp = 1;
     double termsSum = 1; //El primer termino vale 1
-    double realValue = pow(E, x);
+    double prevValue = 0;
 
-    for ( int i = 0; fabs(termsSum - realValue) > PRECISION ; i++ ) {
-        termsSum += ( pow(x, i) / factorial(i) );
+    for ( int i = 1; fabs(termsSum - prevValue) > PRECISION ; i++) {
+        prevValue = termsSum;
+        exp*=x;
+        factorial*=i;
+        termsSum += ( (double) exp / factorial);
     }
 
     return termsSum;
-}
-
-int factorial (int c) {
-    int fact = 1;
-
-    for ( int i = c; i > 0; i-- ) {
-        fact *= i;
-    }
-
-    return fact;
 }
