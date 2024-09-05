@@ -16,7 +16,7 @@ int main(void)
     printip(ip, 23);
     printip(ip, 25);
 
-    return 0;
+    return 
 }
 
 void printip(unsigned long ip, unsigned char bitsNet)
