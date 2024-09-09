@@ -5,6 +5,10 @@
         "stdio.h": "c",
         "getnum.h": "c",
         "stdlib.h": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "__tuple": "c",
+        "array": "c",
+        "assert.h": "c",
+        "math.h": "c"
     }
 }
