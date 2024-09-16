@@ -45,7 +45,7 @@ int main(void)
         {'0', '0', '0', '0', '0', '0'},
         {'0', '0', '0', '0', '0', '1'}};
     // Las reinas en (1,0) y (2,1) se amenazan en forma diagonal
-    // assert(nQueens2(6, board3) == 0);
+    assert(nQueens2(6, board3) == 0);
     char board4[][6] = {
         {'0', '0', '0', '1', '0', '0'},
         {'0', '0', '0', '0', '0', '0'},
@@ -58,7 +58,9 @@ int main(void)
     // No hay solución para tableros de dimensión 2 o 3
     assert(nQueens2(3, board2) == 0);
     assert(nQueens2(2, board2) == 0);
-    // En un tablero de 1x1 debe haber una reina char board1[][1] = {{'1'}}; assert(nQueens(1, board1));
+    // En un tablero de 1x1 debe haber una reina 
+    const char board1[][1] = {{'1'}}; 
+    assert(nQueens2(1, board1));
     puts("OK!");
     return 0;
 }
@@ -99,7 +101,7 @@ int isQueenThreatened(unsigned int n, const char m[][n], unsigned int y, unsigne
 
     //  Al encontrar una reina, escaneamos en las siguientes direcciones en busca de otra,
     //  las demas estan escaneadas previamente
-    const int directions[][2] = {{1, 0}, {0, -1}, {-1, -1}, {1, -1}};
+    static signed char directions[][2] = {{1, 0}, {0, -1}, {-1, -1}, {1, -1}};
 
     // Para cada una de las direcciones
     for (int d = 0; d < 4; d++)
