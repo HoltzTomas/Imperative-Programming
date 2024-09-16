@@ -10,6 +10,12 @@
 #include <assert.h>
 #include "../../random.h"
 
+static int
+randInt(int from, int to) {
+    return rand() % (to - from + 1) + from;
+}
+
+
 void convertirATexto(unsigned long number, char s[]);
 
 int main(void)

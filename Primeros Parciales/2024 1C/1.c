@@ -47,7 +47,6 @@ void firstN(unsigned char v[], unsigned int dim, unsigned int n, int *newDim, in
 
     unsigned char appearences[MAX_CHAR] = {0};
     unsigned int writeIndex = 0;
-    unsigned int deleteElements = 0;
 
     for (int i = 0; i < dim; i++)
     {
@@ -57,14 +56,11 @@ void firstN(unsigned char v[], unsigned int dim, unsigned int n, int *newDim, in
         if(appearences[actual] < n){
             appearences[actual]++;
             v[i] = v[writeIndex++];
-        } else {
-            //En este caso el elemento fue salteado/eliminado
-            deleteElements++;
         }
     }
 
     *newDim = writeIndex;
-    *delElements = deleteElements;
+    *delElements = dim - *newDim;
 
     return;
 }
