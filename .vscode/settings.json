@@ -10,6 +10,7 @@
         "array": "c",
         "assert.h": "c",
         "math.h": "c",
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "random": "c"
     }
 }
