@@ -64,14 +64,13 @@ void complemento(char str[], char out[26])
         if (isalpha(ch))
         {
             unsigned char actual = toupper(ch) - 'A';
-            if (actual < 26) //Esto porque el sistema podria estar en español
+            if (actual < 26) //Esto porque el sistema podria estar en español, no se si tiene sentido
                 letters_present |= (1U << actual);
         }
     }
 
     int write_idx = 0;
 
-    // Construir el string de salida con las letras ausentes
     for (int j = 0; j < 26; j++)
     {
         if ((letters_present & (1U << j)) == 0)
