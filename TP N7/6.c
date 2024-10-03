@@ -15,7 +15,7 @@
  *
  * @cond sino el programa debe informarle cuántos dígitos están BIEN (son correctos y están en su lugar)
  *       y cuántos son REGULARES (son correctos pero están fuera de lugar) y se vuelve a ejecutar el paso anterior
- *
+ *f
  * * Así se va guiando al jugador hasta que adivine el número.
  *
  **/
