@@ -17,6 +17,7 @@
         "complex": "c",
         "string.h": "c",
         "__node_handle": "c",
-        "utillist.h": "c"
+        "utillist.h": "c",
+        "complexadt.h": "c"
     }
 }
