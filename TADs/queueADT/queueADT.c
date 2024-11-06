@@ -13,9 +13,27 @@ typedef struct node {
 struct queueCDT {
     tnode *first;
     tnode *last;
+    tnode *iterator;
 };
 
 static void freeRec(tnode *l);
+
+void toBegin(queueADT q) {
+    q->iterator = q->first;
+    return;
+}
+
+int hasNext(queueADT q) {
+    return q->iterator != NULL;
+}
+
+elementType next(queueADT q) {
+    if(!hasNext(q)) exit(1);
+
+    elementType elem = q->iterator->value;
+    q->iterator = q->iterator->next;
+    return elem;
+}
 
 void queue(queueADT q, elementType n) {
     tnode *node = calloc(1, sizeof(tnode));

@@ -13,3 +13,11 @@ void dequeue(queueADT q, elementType * out);
 int isEmpty(queueADT q);
  
 void freeQueue(queueADT q);
+
+/* Funciones para iterar */
+ 
+void toBegin(queueADT q);
+ 
+int hasNext(queueADT q);
+ 
+elementType next(queueADT q);
