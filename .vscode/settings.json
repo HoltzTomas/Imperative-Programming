@@ -21,6 +21,10 @@
         "complexadt.h": "c",
         "setadt.h": "c",
         "listadt.h": "c",
-        "list": "c"
+        "list": "c",
+        "__locale": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "__string": "cpp"
     }
 }

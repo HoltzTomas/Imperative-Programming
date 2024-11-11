@@ -1,19 +1,12 @@
 typedef struct bagCDT * bagADT;
 
 
-typedef ... elemType;    // Tipo de elemento a insertar
+typedef const char * elemType;    // Tipo de elemento a insertar
 
-/**
-** Retorna 0 si los elementos son iguales
-*/
-static int compare (elemType e1, elemType e2) {
-   ...
-}
-
+typedef int (*compare)(elemType, elemType);
 
 /* Retorna un nuevo bag de elementos genéricos. Al inicio está vacío */
-bagADT newBag();
-
+bagADT newBag( compare cmp );
 
 /* Inserta un elemento. Retorna cuántas veces está
 ** elem en el conjunto luego de haberlo insertado (p.e. si es la 
@@ -34,6 +27,8 @@ unsigned int size(const bagADT bag);
 ** elem en el conjunto luego de haberlo borrado 
 */
 unsigned int delete(bagADT bag, elemType elem);
+
+void freeBag( bagADT bag);
 
 
 /* Retorna el elemento que aparece más veces. Si hay más de uno
