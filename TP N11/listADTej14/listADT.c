@@ -1,109 +1,129 @@
-#include "listADT.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-// Mantenemos dos listas, una ascendente y otra por orden de inserción (una cola)
+#include "listADT.h"
+/*
+ * Esta solución evita tener que duplicar los nodos.
+ * Para eso usa dos punteros tail en cada nodo:
+ * uno que sigue el orden ascendente y otro guarda el orden de inserción
+ * No se puede usar un solo tail, porque estaríamos en un momento 
+ * apuntando al siguiente ascendente y luego lo cambiaría al siguiente por orden de inserción.
+*/
 typedef struct listCDT {
     struct node * firstAsc;     // primero en orden ascendente
     struct node * firstInsert;
     struct node * lastInsert;
     struct node * iterAsc;      // para iterar en orden ascendente
     struct node * iterInsert;
-    int (*compare) (elemType e1, elemType e2);  // almacenamos la función de comparación
+    int (*compare) (elemType e1, elemType e2); // función de comparación
 } listCDT;
 
 typedef struct node {
   elemType elem;
-  struct node * tail;
+  struct node * tailasc;        // para seguir el orden ascendente
+  struct node * tailins;        // para seguir el orden de insercion
 } node;
 
+
 listADT newList(int (*compare) (elemType e1, elemType e2)) {
-  listADT ans = calloc(1, sizeof(listCDT));
-  ans->compare = compare;
-  return ans;
+ listADT ans = calloc(1,sizeof(listCDT));
+ ans->compare = compare;
+ return ans;
 }
 
-static node * addRec(node * first, elemType elem, int *ok, int (*compare) (elemType e1, elemType e2)) {
-  int c;
-  if ( first == NULL ||  ( c =  compare(elem, first->elem)) < 0) {
-    node * aux = malloc(sizeof(node));
+struct node *
+nuevoNodo(elemType elem) {
+    struct node*aux = malloc(sizeof(struct node));
     aux->elem = elem;
-    aux->tail = first;
-    *ok = 1;
+    aux->tailasc = NULL;
+    aux->tailins = NULL;
     return aux;
-  }
-  if ( c > 0 )
-    first->tail = addRec(first->tail,  elem, ok, compare);
-  return first;
 }
 
 void add(listADT list, elemType elem) {
-  // primero insertarmos en orden, y que nos diga si estaba o no
-  int added = 0;
-  list->firstAsc = addRec(list->firstAsc, elem, &added, list->compare);
-  if ( added ) {    // Si no estaba, entonces lo agregamos directamente al final de la otra lista
-    node * aux = malloc(sizeof(node));
-    aux->elem = elem;
-    aux->tail = NULL;
-    if ( list->firstInsert == NULL)
-      list->firstInsert = aux;
-    else
-      list->lastInsert->tail = aux;
-    list->lastInsert = aux;
-  }
+    struct node *aux;
+    if (list->firstInsert == NULL || list->compare(list->firstAsc->elem,elem)>0) {
+        aux = nuevoNodo(elem);
+        aux->tailasc = list->firstAsc;
+        list->firstAsc = aux;
+        if (list->firstInsert == NULL)
+        {
+            list->firstInsert = aux;
+            list->lastInsert = aux;
+        }
+        else
+        {
+            list->lastInsert->tailins = aux;
+            list->lastInsert= aux;
+        }
+        return;
+    }
+
+    struct node *iter = list->firstAsc;
+    int c;
+    while (iter->tailasc!=NULL && ( c = list->compare(iter->tailasc->elem,elem))<0) {
+        iter = iter->tailasc;
+    }
+    if ( c!=0 ) {
+        aux = nuevoNodo(elem);
+        aux->tailasc = iter->tailasc;
+        iter->tailasc = aux;
+        list->lastInsert->tailins = aux;
+        list->lastInsert = aux;
+    }
+    return;
 }
 
-/* Elimina un elemento. */
-// void remove(listADT list, elemType elem)
-
 void toBegin(listADT list) {
-  list->iterInsert = list->firstInsert;
+    list->iterInsert = list->firstInsert;
 }
 
 int hasNext(listADT list) {
-  return list->iterInsert != NULL;
+    return (list->iterInsert !=  NULL);
 }
 
-/* Retorna el elemento siguiente del iterador que recorre la lista en el orden de inserción. 
-** Si no hay un elemento siguiente o no se invocรณ a toBegin aborta la ejecución.
-*/
 elemType next(listADT list) {
-  if ( !hasNext(list)) {
-    fprintf(stderr, "Invalid use of iterator\n");
-    exit(1);
-  }
-  elemType toReturn = list->iterInsert->elem;
-  list->iterInsert = list->iterInsert->tail;
-  return toReturn;
+    if ( !hasNext(list)) {
+        fprintf(stderr, "Invalid use of iterator");
+        exit(1);
+    }
+    elemType toReturn = list->iterInsert->elem;
+    list->iterInsert = list->iterInsert->tailins;
+    return toReturn;
 }
 
 void toBeginAsc(listADT list) {
-  list->iterAsc = list->firstAsc;
+    list->iterAsc = list->firstAsc;
 }
 
 int hasNextAsc(listADT list) {
-  return list->iterAsc != NULL;
+    return (list->iterAsc !=  NULL);
 }
 
 elemType nextAsc(listADT list) {
-  if ( !hasNextAsc(list)) {
-    fprintf(stderr, "Invalid use of ordered iterator\n");
-    exit(1);
-  }
-  elemType toReturn = list->iterAsc->elem;
-  list->iterAsc = list->iterAsc->tail;
-  return toReturn;
+    if ( !hasNextAsc(list)) {
+        fprintf(stderr, "Invalid use of iterator");
+        exit(1);
+    }
+    elemType aux = list->iterAsc->elem;
+    list->iterAsc = list->iterAsc->tailasc;
+    return aux;
 }
+
+/* Libera la memoria reservada por la lista
+ Se puede seguir cualquier orden. Es lo mismo, porque los nodos liberados son únicos.
+ Si se sigue tailasc, liberará en forma ascendente todos los nodos
+ Si se sigue tailins, liberará en forma insertada todos los nodos
+ Pero de cualquier forma libera todos los nodos.
+*/
 
 void freeRec(node * first) {
   if ( first == NULL)
     return;
-  freeRec(first->tail);
+  freeRec(first->tailasc);
   free(first);
 }
 
 void freeList(listADT list) {
   freeRec(list->firstAsc);
-  freeRec(list->firstInsert);
   free(list);
 }
