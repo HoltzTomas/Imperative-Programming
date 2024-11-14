@@ -26,6 +26,7 @@
         "string": "cpp",
         "string_view": "cpp",
         "__string": "cpp",
-        "vectoradt.h": "c"
+        "vectoradt.h": "c",
+        "squirreladt.h": "c"
     }
 }
