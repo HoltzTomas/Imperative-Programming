@@ -28,6 +28,10 @@
         "__string": "cpp",
         "vectoradt.h": "c",
         "squirreladt.h": "c",
-        "countersadt.h": "c"
+        "countersadt.h": "c",
+        "__bit_reference": "c",
+        "bitset": "c",
+        "set": "c",
+        "unordered_map": "c"
     }
 }
